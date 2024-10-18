@@ -69,27 +69,27 @@ public: // Public members of DoublyLinkedList
             head = temp->next;  // than set head to point to the node after temp cause we will be deleting temp
 
         if (temp->next) // If temp isnt the tail node
-            temp->next->prev = temp->prev; // set the node after temp's
-        else
-            tail = temp->prev; 
+            temp->next->prev = temp->prev; // set the node after temp's previous pointer to point to the node before temp cause were deleting temp, that connects the before and after node together
+        else // if temp is the tail node
+            tail = temp->prev; // set the tail pointer to point to the node before temp because we will now be deleting temp soon
 
-        delete temp;
+        delete temp; // oh and here it is, we now finally delete temp, meaning that that node is officially gone. now i would have also set temp to nullptr after this to not have it dangling.
     }
 
-    void delete_pos(int pos) {
-        if (!head) {
-            cout << "List is empty." << endl;
-            return;
+    void delete_pos(int pos) { // We are deleting a node in a certain position. This is not like delete_after cause this is deleting at the precise postiion
+        if (!head) { // If head isn't pointing to anything
+            cout << "List is empty." << endl; // then let user know that the list is empty
+            return; // break out of the function
         }
     
-        if (pos == 1) {
-            pop_front();
-            return;
+        if (pos == 1) { // if position is 1, meaning the head node
+            pop_front(); // call our pop_front() function which specializes in deleting the head node
+            return; // braek out of the fucntion
         }
     
-        Node* temp = head;
+        Node* temp = head; // lets create our temp node pointer again and set it equal to the starting node for traversal
     
-        for (int i = 1; i < pos; i++){
+        for (int i = 1; i < pos; i++){ //
             if (!temp) {
                 cout << "Position doesn't exist." << endl;
                 return;
