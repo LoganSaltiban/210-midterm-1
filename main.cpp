@@ -29,24 +29,24 @@ public: // Public members of DoublyLinkedList
         }
 
         Node* newNode = new Node(value); // Creating a pointer newNode that points to a newly created Node object in heap and uses value for the constructor 
-        if (!head) { // Test casing to see whether 
-            head = tail = newNode;
-            return;
+        if (!head) { // Test casing to see whether the list is empty if head isnt pointing to anything
+            head = tail = newNode; // Then we set both head and tail to that newNode because if above line is true, then the list is empty so the head and tail are going to be pointing to same
+            return; // breaking out of function since the job will be handled already if the list is already empty
         }
 
-        Node* temp = head;
-        for (int i = 0; i < position && temp; ++i)
-            temp = temp->next;
+        Node* temp = head; // If list is not empty, lets create a temp traversal node* variable called temp and set it to point to first node (head node)
+        for (int i = 0; i < position && temp; ++i) // Traversing through the linked list while using position as the number of times we are doing it. The addition && temp checks to see whether temp is still pointing at something, meaning we can still traverse
+            temp = temp->next; // Letting temp point to the next node in the DLL if the above conditions in for loop still hold true
 
-        if (!temp) {
-            cout << "Position exceeds list size. Node not inserted.\n";
-            delete newNode;
-            return;
+        if (!temp) { // Test casing whether or not position exceeds the amount of nodes in our linked list. We do this by saying !temp or if temp is nullptr
+            cout << "Position exceeds list size. Node not inserted.\n"; // Let user know that his position exceeds the amount of nodes in DLL
+            delete newNode; // Free up memory by deleting our New Node because then theres nothing to add after pos if above if statement is true
+            return; // braek out of insert_after()
         }
 
-        newNode->next = temp->next;
-        newNode->prev = temp;
-        if (temp->next)
+        newNode->next = temp->next; // If the above cases hold true, that means temp is at the spot we want to the insert node after. so now we gotta connect newNode into that list. This line allows newNode to point to tempNode's next, as we will be inserting in the middle of temp and temp-next
+        newNode->prev = temp; // We will now allow temp to be the Node* prev pointing in our new node, as our newNode is now in front of temp
+        if (temp->next) //
             temp->next->prev = newNode;
         else
             tail = newNode;
