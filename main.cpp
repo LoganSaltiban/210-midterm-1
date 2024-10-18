@@ -160,33 +160,33 @@ public: // Public members of DoublyLinkedList
         }
         Node * temp = tail; // create our temp node pointer and set to current tail
 
-        if (tail->prev) { // if tail's previoius
-            tail = tail->prev;
-            tail->next = nullptr;
+        if (tail->prev) { // if current tails previous is pointing to something
+            tail = tail->prev; // set current tail to the new tail by setting it equal to 2nd to last node.
+            tail->next = nullptr; // set that 2nd to last node (now new tail) next ptr nullptr since it will now serve as the tail
         }
-        else
-            head = tail = nullptr;
-        delete temp;
+        else // else if there's only one ndoe in list
+            head = tail = nullptr; // set head and tail to nullptr since there will now be no nodes after temp is deleted
+        delete temp; // finally deleting our old tail node
     }
 
-    ~DoublyLinkedList() {
-        while (head) {
-            Node* temp = head;
-            head = head->next;
-            delete temp;
+    ~DoublyLinkedList() { // destructor for doublylinkedlist class
+        while (head) { // creates a while loop and executes while head is not pointing to nullptr
+            Node* temp = head; // creates temp node* variable temp and set sto head
+            head = head->next; // sets head pointer to point to next node in DLL
+            delete temp; // deletes temp which is a node
         }
     }
-    void print() {
-        Node* current = head;
-        if (!current) {
-            cout << "List is empty." << endl;
-            return;
+    void print() { // print function that prints all nodes data in the DLL
+        Node* current = head; // create temp traversal Node* called curent
+        if (!current) { // if current is not pointing to a node
+            cout << "List is empty." << endl; // then the list is empty
+            return; // break out of the fucntion
         }
-        while (current) {
-            cout << current->data << " ";
-            current = current->next;
+        while (current) { // while current is pointing to a node
+            cout << current->data << " "; // print current node's data and then add a space
+            current = current->next; // set current to the next node in the list and repeat while loop
         }
-        cout << endl;
+        cout << endl; // finally ends line after print function for organizability
     }
 
     void print_reverse() {
