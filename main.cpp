@@ -89,34 +89,34 @@ public: // Public members of DoublyLinkedList
     
         Node* temp = head; // lets create our temp node pointer again and set it equal to the starting node for traversal
     
-        for (int i = 1; i < pos; i++){ //
-            if (!temp) {
-                cout << "Position doesn't exist." << endl;
-                return;
+        for (int i = 1; i < pos; i++){ // traversing through our list, but now our index starts at 1 since we already test cased for our head node and ends at pos
+            if (!temp) { // if pos goes further than the list length (meaning if temp points to nullptr)
+                cout << "Position doesn't exist." << endl; // let user know
+                return; // break ouit of the function
             }
-            else
-                temp = temp->next;
+            else // if the position is not nullptr
+                temp = temp->next; //then keep traversing the list as normal
         }
-        if (!temp) {
-            cout << "Position doesn't exist." << endl;
-            return;
-        }
-    
-        if (!temp->next) {
-            pop_back();
-            return;
+        if (!temp) { // If temp is nullptr after our traversal is done, that means the position still doesnt exist
+            cout << "Position doesn't exist." << endl; // let user know
+            return; // break out of the function
         }
     
-        Node* tempPrev = temp->prev;
-        tempPrev->next = temp->next;
-        temp->next->prev = tempPrev;
-        delete temp;
-    }
+        if (!temp->next) { // if temp's next points to nullptr, then temp (pos) is the tail of the DLL
+            pop_back(); // use our efficient pop_back function that deletes tail node
+            return; // break out of the function
+        }
+    
+        Node* tempPrev = temp->prev; // If it isnt the tail, than create a temp previous pointer and set it equal to the node before temp
+        tempPrev->next = temp->next; // set the node before temp's next pointer to the node after temp to connect DLL
+        temp->next->prev = tempPrev; // Sets the node after temp's previous pointer to tempPrev
+        delete temp; // delete our node at the position (pos)
+    } // end delete_pos
 
-    void push_back(int v) {
-        Node* newNode = new Node(v);
-        if (!tail)
-            head = tail = newNode;
+    void push_back(int v) { // function that creates a new node at the tail position with an int parameter
+        Node* newNode = new Node(v); // creates a node* newNode and creates a new node in heap and initializes constructor with that value v
+        if (!tail) // if tail isn't pointing to anything, than we have an empty list
+            head = tail = newNode; // then lets set the head and tail to that new node
         else {
             tail->next = newNode;
             newNode->prev = tail;
