@@ -27,6 +27,12 @@ public: // Public members of DoublyLinkedList
         Node* current = head; // create a traversal node pointer starting at the head
         int nodeIndex = 1; // cretes a node index which will be useful to check whether its odd and since this function only prints odd node's data values will be useful
 
+        if (!current) // test case if list is empty
+        {
+            cout << "List is empty" << endl;
+            return;
+        }
+
         while (current) // while current is pointing to something
         {
             if (nodeIndex % 2 != 0) // check if node index is odd
