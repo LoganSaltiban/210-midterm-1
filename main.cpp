@@ -46,30 +46,30 @@ public: // Public members of DoublyLinkedList
 
         newNode->next = temp->next; // If the above cases hold true, that means temp is at the spot we want to the insert node after. so now we gotta connect newNode into that list. This line allows newNode to point to tempNode's next, as we will be inserting in the middle of temp and temp-next
         newNode->prev = temp; // We will now allow temp to be the Node* prev pointing in our new node, as our newNode is now in front of temp
-        if (temp->next) //
-            temp->next->prev = newNode;
-        else
-            tail = newNode;
-        temp->next = newNode;
+        if (temp->next) // if temp node next node* is pointing to something
+            temp->next->prev = newNode; // than we will set the node after newNode in the list's previous node* to our newly created NewNode
+        else // BUT IF ITS NOT
+            tail = newNode; // then we know that temp is at the end of the list, making newNode our tail (last) node now
+        temp->next = newNode; // Then we will set temp's next pointer to the new tail which is our newNode
     }
 
-    void delete_val(int value) {
-        if (!head) return;
+    void delete_val(int value) { // function to delete node based on the value given in parameter
+        if (!head) return; // checking if the list if empty... if it is than break out of the function cause we cant delete something that doesnt exist
 
-        Node* temp = head;
+        Node* temp = head; // Lets create once again our temporary pointer and set it at the head for traversal later on
         
-        while (temp && temp->data != value)
-            temp = temp->next;
+        while (temp && temp->data != value) // While temp is pointing to something and the int data of that node doesnt equal the node in the parameter
+            temp = temp->next; // than keep traversing the DLL by setting temp to point to the next node
 
-        if (!temp) return; 
+        if (!temp) return;  // If temp isn't pointing to anything (nullptr), then break out, because than the value doesnt exist
 
-        if (temp->prev)
-            temp->prev->next = temp->next;
-        else
-            head = temp->next; 
+        if (temp->prev) // if traversal was successful, check if temp is not at the start of the list (head)
+            temp->prev->next = temp->next; // if it isnt, than set the node before temp's next pointer to the node after temp, this connects the two since we are going to be deleting temp
+        else // if temp is the head node
+            head = temp->next;  // than set head to point to the node after temp cause we will be deleting temp
 
-        if (temp->next)
-            temp->next->prev = temp->prev;
+        if (temp->next) // If temp isnt the tail node
+            temp->next->prev = temp->prev; // set the node after temp's
         else
             tail = temp->prev; 
 
