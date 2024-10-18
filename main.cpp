@@ -22,6 +22,29 @@ private: // Private Members
 public: // Public members of DoublyLinkedList
     DoublyLinkedList() { head = nullptr; tail = nullptr; } // Constructor that when a doublylinkedlist is created sets head and tail pointers (node*) to nullptr;
 
+    void every_other_element() // function that will print every other node's data point starting at 1 so basically every odd node
+    {
+        Node* current = head; // create a traversal node pointer starting at the head
+        int nodeIndex = 1; // cretes a node index which will be useful to check whether its odd and since this function only prints odd node's data values will be useful
+
+        while (current) // while current is pointing to something
+        {
+            if (nodeIndex % 2 != 0) // check if node index is odd
+            {
+                cout << current->data << " "; // print odd node's data
+                current = current->next; // point to next node
+                nodeIndex++; // increase node index
+            }
+
+            if (nodeIndex % 2 == 0) // if its an even number, dont print data just go to next node and increase nodeindex
+            {
+                current = current->next; // point to next node
+                nodeIndex++; // increase node index
+            }
+            
+        }
+        cout << endl; // for organizability and reusability
+    }
     void insert_after(int value, int position) { // Function that will insert a node after a certain position
         if (position < 0) { // Checking to see if position is a negative number. Test casing, otherwise wont be able to traverse DLL
             cout << "Position must be >= 0." << endl; // Error prompting user if pos < 0
