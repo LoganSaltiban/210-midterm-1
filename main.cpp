@@ -1,35 +1,35 @@
-#include <iostream>
-using namespace std;
+#include <iostream> // Including Input Output Stream Library
+using namespace std; // Compiler assumes std:: prefix
 
-const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20;
+const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20; // Creating MIN & MAX values for cases to generate random numbers
 
-class DoublyLinkedList {
-private:
-    struct Node {
-        int data;
-        Node* prev;
-        Node* next;
-        Node(int val, Node* p = nullptr, Node* n = nullptr) {
-            data = val; 
-            prev = p;
-            next = n;
+class DoublyLinkedList { // Creating a Class called Doubly Linked List
+private: // Private Members
+    struct Node { // Creating a struct called Node inside of private section
+        int data; // Node holds a data point int
+        Node* prev; // Node holds a Node that will point to the previous node in that linked list
+        Node* next; // Node holds a Node pointer that will point to the next node in that linked list
+        Node(int val, Node* p = nullptr, Node* n = nullptr) { // Here we have a parameter constructor for creating a Node. It has 3 parameters
+            data = val; // First parameter is an int that sets data to that int val
+            prev = p; // Second parameter is a node pointer p that sets prev to whatever p is pointing to
+            next = n; // Third parameter is a node pointer n that sets next to whatever n is pointing to
+        } // End Parameter Constructor
+    }; // End Node Structure
+
+    Node* head; // Pointers that point to nodes within DoublyLinkedList. Will be used to point at head node
+    Node* tail; // Pointers that point to nodes within DoublyLinked List. Will be used to point at tail node
+
+public: // Public members of DoublyLinkedList
+    DoublyLinkedList() { head = nullptr; tail = nullptr; } // Constructor that when a doublylinkedlist is created sets head and tail pointers (node*) to nullptr;
+
+    void insert_after(int value, int position) { // Function that will insert a node after a certain position
+        if (position < 0) { // Checking to see if position is a negative number. Test casing, otherwise wont be able to traverse DLL
+            cout << "Position must be >= 0." << endl; // Error prompting user if pos < 0
+            return; // breaking out of the function insert_after if true
         }
-    };
 
-    Node* head;
-    Node* tail;
-
-public:
-    DoublyLinkedList() { head = nullptr; tail = nullptr; }
-
-    void insert_after(int value, int position) {
-        if (position < 0) {
-            cout << "Position must be >= 0." << endl;
-            return;
-        }
-
-        Node* newNode = new Node(value);
-        if (!head) {
+        Node* newNode = new Node(value); // Creating a pointer newNode that points to a newly created Node object in heap and uses value for the constructor 
+        if (!head) { // Test casing to see whether 
             head = tail = newNode;
             return;
         }
