@@ -38,16 +38,9 @@ public: // Public members of DoublyLinkedList
             if (nodeIndex % 2 != 0) // check if node index is odd
             {
                 cout << current->data << " "; // print odd node's data
-                current = current->next; // point to next node
-                nodeIndex++; // increase node index
             }
-
-            if (nodeIndex % 2 == 0) // if its an even number, dont print data just go to next node and increase nodeindex
-            {
-                current = current->next; // point to next node
-                nodeIndex++; // increase node index
-            }
-            
+            current = current->next; // point to next node
+            nodeIndex++; // increase node index
         }
         cout << endl; // for organizability and reusability
     }
@@ -233,8 +226,14 @@ public: // Public members of DoublyLinkedList
 };
 
 int main() { // main function which doesn't do much
-    cout << MIN_NR + MIN_LS + MAX_NR + MAX_LS;  // dummy statement to avoid compiler warning
+    DoublyLinkedList checkingAccountBalances;
+    checkingAccountBalances.push_back(50);
+    checkingAccountBalances.push_back(75);
+    checkingAccountBalances.push_back(48);
+    checkingAccountBalances.push_back(27);
+    checkingAccountBalances.push_back(20);
 
+    checkingAccountBalances.every_other_element();
     
     return 0; // ends program
 }
