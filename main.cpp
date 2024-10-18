@@ -116,51 +116,51 @@ public: // Public members of DoublyLinkedList
     void push_back(int v) { // function that creates a new node at the tail position with an int parameter
         Node* newNode = new Node(v); // creates a node* newNode and creates a new node in heap and initializes constructor with that value v
         if (!tail) // if tail isn't pointing to anything, than we have an empty list
-            head = tail = newNode; // then lets set the head and tail to that new node
-        else {
-            tail->next = newNode;
-            newNode->prev = tail;
-            tail = newNode;
+            head = tail = newNode; // then lets set the head and tail to that new node since its going to be the only node
+        else { // otherwise if the tail isnt empty
+            tail->next = newNode; // set the current tail node's next pointer to our newly created Node
+            newNode->prev = tail; // set our newly created node's previous pointer to point at the tail node to connect DLL
+            tail = newNode; // finally reset the tail to point to our newly created node that was added at the end of the list
         }
     }
     
-    void push_front(int v) {
-        Node* newNode = new Node(v);
-        if (!head)
-            head = tail = newNode;
-        else {
-            newNode->next = head;
-            head->prev = newNode;
-            head = newNode;
+    void push_front(int v) { // function that creates a new node at the front of the list. takes v as an int parameter
+        Node* newNode = new Node(v); // creates a node* newNode that creates a new node in heap and intiializes constructor with v
+        if (!head) // if head isnt pointing to anything than list is empty
+            head = tail = newNode; // set head and tail to new node since its going to be the only node
+        else { // if the list isnt empty
+            newNode->next = head; // set our new node's next pointer to head since its going to now be 2nd node
+            head->prev = newNode; // set our head pointers (2nd node) previous to our new head which is going to be newNode
+            head = newNode; // and make it official by setting the head pointer to point to our new head which is newNode
         }
     }
     
-    void pop_front() {
+    void pop_front() { // function that deletes the first node in our linked list
 
-        if (!head) {
-            cout << "List is empty." << endl;
-            return;
+        if (!head) { // check if the list is empty
+            cout << "List is empty." << endl; // display to user that the list is empty
+            return; // break out of the function
         }
 
-        Node * temp = head;
+        Node * temp = head; // if not, create our temp node pointer and set it equal to our current head so we can delete temp later
 
-        if (head->next) {
-            head = head->next;
-            head->prev = nullptr;
-        }
-        else
-            head = tail = nullptr;
-        delete temp;
+        if (head->next) { // if head is pointing to something,
+            head = head->next; // set our head to the 2nd node so that the 2nd node can become the new head of DLL
+            head->prev = nullptr; // set 2nd node (which is now current head node) previous pointer to null since its now the new head
+        } 
+        else // if theres only one node inthe list
+            head = tail = nullptr; // set head and tail to nullptr since there will be no nodes after we delete this temp
+        delete temp; // finally deletes temp which was the old head node
     }
 
-    void pop_back() {
-        if (!tail) {
-            cout << "List is empty." << endl;
-            return;
+    void pop_back() { // function that deletes the current tail node
+        if (!tail) { // checks to see if the list is empty by checking to see if tail is pointing to something
+            cout << "List is empty." << endl; // lets user know list is empty
+            return; // breaks out of function
         }
-        Node * temp = tail;
+        Node * temp = tail; // create our temp node pointer and set to current tail
 
-        if (tail->prev) {
+        if (tail->prev) { // if tail's previoius
             tail = tail->prev;
             tail->next = nullptr;
         }
