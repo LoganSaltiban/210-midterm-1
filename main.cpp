@@ -189,23 +189,23 @@ public: // Public members of DoublyLinkedList
         cout << endl; // finally ends line after print function for organizability
     }
 
-    void print_reverse() {
-        Node* current = tail;
-        if (!current) { 
-            cout << "List is empty." << endl;
-            return;
+    void print_reverse() { // function that prints the data of each node starting from tail and ending at head
+        Node* current = tail; // creates temp node* that points to tail
+        if (!current) {  // if current is pointing to nullptr
+            cout << "List is empty." << endl; // than the list is empty
+            return; // break out of the function
         }
-        while (current) {
-            cout << current->data << " ";
-            current = current->prev;
+        while (current) { // while current is actually pointin gto a  node
+            cout << current->data << " "; // print that current node's data point and add a space
+            current = current->prev; // set current to the node previous, which works since we start at tail and end at head
         }
-        cout << endl;
+        cout << endl; // ends line for organizability and allows for print functions to seperate when called multiple times
     }
 };
 
-int main() {
+int main() { // main function which doesn't do much
     cout << MIN_NR + MIN_LS + MAX_NR + MAX_LS;  // dummy statement to avoid compiler warning
 
     
-    return 0;
+    return 0; // ends program
 }
